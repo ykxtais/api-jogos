@@ -1,0 +1,46 @@
+services:
+  postgres-dimdim:
+    image: postgres:16
+    container_name: postgres-dimdim
+    environment:
+      POSTGRES_DB: jogosdb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: passwd
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d jogosdb"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+    networks:
+      - dimdim-net
+
+
+  api-jogos:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api-jogos
+    depends_on:
+      postgres-dimdim:
+        condition: service_healthy
+    environment:
+      DB_HOST: postgres-dimdim
+      DB_PORT: "5432"
+      DB_NAME: jogosdb
+      DB_USER: user
+      DB_PASS: passwd
+      JAVA_TOOL_OPTIONS: "-XX:MaxRAMPercentage=75.0"
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    networks:
+      - dimdim-net
+
+networks:
+  dimdim-net:
+
+volumes:
+  pgdata:
