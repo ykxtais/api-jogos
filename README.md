@@ -69,7 +69,7 @@ docker compose up -d --build
   - Confira logs: docker compose logs -f postgres-dimdim.
 - Não abre no navegador
   - Verifique se passou o IP em `http://<ip>:8080/swagger-ui/index.html` corretamente;
-  - Verifique que as porta `8080` esteja abertas;
+  - Verifique que a porta `8080` esteja aberta;
   - Certifique-se de subir os contêineres `docker compose up -d` e que estão "Up" `docker compose ps`.
 
 #
