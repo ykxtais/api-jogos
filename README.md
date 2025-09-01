@@ -12,16 +12,11 @@ Isso garante ambientes padronizados, escalabilidade e um processo de deploy cont
 
 ## 2. Arquitetura
 
-### Arquitetura Anterior
+| Arquitetura Anterior | Arquitetura Atual (Docker Compose) |
+|:--------------------------------------------:|:------------------------------------------------------:|
+| A aplicação roda como java -jar (ou via IDE) diretamente no host. O banco PostgreSQL também é configuradono host (ou serviço externo). O deploy é manual, sujeito a variações de ambiente. | Dois contêineres: api-jogos (aplicação) e postgres-dimdim (banco), na mesma rede bridge. O banco usa volume para persistência e healthcheck; a aplicação roda como usuário não-root. Exposição externa via mapeamento de porta do host. |
+| <img src="https://github.com/user-attachments/assets/a6860a30-2c60-4d6a-90d8-0f2f3167c97a" width="420" alt="antes" /> | <img src="https://github.com/user-attachments/assets/c73c9388-ab69-4009-abe8-ab70f9ae13cb" width="420" alt="depois" /> |
 
-A aplicação roda como java -jar (ou via IDE) diretamente no host. O banco PostgreSQL também é configurado
-no host (ou serviço externo). O deploy é manual, sujeito a variações de ambiente.
-
-
-### Arquitetura Atual com Docker Compose
-
-Dois contêineres: api-jogos (aplicação) e postgres-dimdim (banco), na mesma rede bridge. O banco usa volume
-para persistência e healthcheck; a aplicação roda como usuário não-root. Exposição externa via mapeamento de porta do host.
 
 ## 3. Tecnologias Utilizadas
 
