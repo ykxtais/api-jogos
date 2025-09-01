@@ -46,7 +46,7 @@ cd api-jogos
 docker compose up -d --build
 ```
   - `--build` força a reconstrução da imagem da aplicação (útil para caso tenha alterações no código).
-  - `-d` roda os contêineres em segundo.
+  - `-d` roda os contêineres em segundo plano.
   
 ### 5.3 Teste
 
@@ -58,7 +58,7 @@ docker compose up -d --build
 - `docker compose up -d` Cria (se necessário) e inicia todos os serviços do docker-compose.yml, constrói a imagem se não existir.
   - `docker compose up -d --build` Força (re)build da imagem (caso tenha ou não alterações no código), depois cria e inicia.
 - `docker compose ps` Lista o status dos serviços do projeto.
-- `docker compose down` Para e remove os containers e as redes do projeto, mantém os dados do banco.
+- `docker compose down` Para e remove os containers e as redes do projeto — mantém os dados do banco.
   - `docker compose down -v` Além do acima, remove os volumes do projeto (nomeados e anônimos) — apaga os dados do banco.
 - `docker compose logs [aplicação]` - Mostra os logs do serviço em tempo real.
 
